@@ -9,6 +9,7 @@
             text-align: center;
             background-color: #ffebcd;
             padding: 50px;
+            overflow: hidden;
         }
         #salamiButton {
             background-color: #28a745;
@@ -34,6 +35,21 @@
         #salamiButton:active {
             animation: shake 0.5s ease-in-out;
         }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .money {
+            position: absolute;
+            top: 0;
+            font-size: 30px;
+            animation: fall 2s linear infinite;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 16px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -45,20 +61,31 @@
     <img src="bkash_qr.png" alt="বিকাশে সালামি পাঠান!" width="150">
     <audio id="salamiSound" src="salami.mp3"></audio><script>
     let count = 0;
-    document.getElementById("salamiButton").addEventListener("click", function() {
-        const messages = [
-            "এই তো হাতে আসছে... ওফ! পড়ে গেল! 😆",
-            "সালামির জন্য অপেক্ষা করতে হবে! 🕰️",
-            "সরি, আমার পকেটও ফাঁকা! 💸",
-            "এত জলদি সালামি চাইলে, খালা/মামার কাছে যাও! 🤣",
-            "আরে বাহ! এটা তো ডিজিটাল যুগ, বিকাশ নাম্বার দাও! 📱💰"
-        ];
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        count++;
-        document.getElementById("message").innerText = `${randomMessage}\nতুমি ${count} বার সালামি চাইলে! 😂`;
-        document.getElementById("salamiSound").play();
-    });
+    function createMoney() {
+        const money = document.createElement("div");
+        money.innerText = "💵";
+        money.classList.add("money");
+        money.style.left = Math.random() * 100 + "%";
+        document.body.appendChild(money);
+        setTimeout(() => money.remove(), 2000);
+    }
+    
+    function askQuestion() {
+        let answer = prompt("ঈদের দিনে সবচেয়ে ভালো জিনিস কী? 🧐\n(ক) সেমাই 🍮 (খ) সালামি 💰 (গ) নতুন জামা 👕");
+        if (answer === "খ") {
+            count++;
+            document.getElementById("message").innerText = `বাহ! তুমি ঠিক বলেছো! নাও তোমার সালামি! 🎉💰\nতুমি ${count} বার সালামি চাইলে! 😂`;
+            document.getElementById("salamiSound").play();
+            for (let i = 0; i < 10; i++) setTimeout(createMoney, i * 200);
+        } else {
+            document.getElementById("message").innerText = "উফ! ভুল বললে! আবার চেষ্টা করো! 😆";
+        }
+    }
+    
+    document.getElementById("salamiButton").addEventListener("click", askQuestion);
 </script>
+
+<p class="footer">Built by Shayokh Mohammad</p>
 
 </body>
 </html>
