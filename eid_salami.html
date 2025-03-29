@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ঈদ সালামি চাই!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffebcd;
+            padding: 50px;
+        }
+        #salamiButton {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        #salamiButton:active {
+            animation: shake 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>ঈদ মোবারক! 🎉</h1>
+    <p>কেমন হবে যদি একটু সালামি পাওয়া যেত?</p>
+    <button id="salamiButton">সালামি চাই!</button>
+    <p id="message"></p>
+    <p>বিকাশে সরাসরি সালামি পাঠাও! 😆</p>
+    <img src="bkash_qr.png" alt="বিকাশে সালামি পাঠান!" width="150">
+    <audio id="salamiSound" src="salami.mp3"></audio><script>
+    let count = 0;
+    document.getElementById("salamiButton").addEventListener("click", function() {
+        const messages = [
+            "এই তো হাতে আসছে... ওফ! পড়ে গেল! 😆",
+            "সালামির জন্য অপেক্ষা করতে হবে! 🕰️",
+            "সরি, আমার পকেটও ফাঁকা! 💸",
+            "এত জলদি সালামি চাইলে, খালা/মামার কাছে যাও! 🤣",
+            "আরে বাহ! এটা তো ডিজিটাল যুগ, বিকাশ নাম্বার দাও! 📱💰"
+        ];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        count++;
+        document.getElementById("message").innerText = `${randomMessage}\nতুমি ${count} বার সালামি চাইলে! 😂`;
+        document.getElementById("salamiSound").play();
+    });
+</script>
+
+</body>
+</html>
